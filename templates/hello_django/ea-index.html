@@ -1,0 +1,93 @@
+{% extends 'hello_django/base.html' %}
+{% block content %}
+<!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Executing Agency</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        {% if user.is_authenticated %}
+                        <div class="d-md-flex">
+                            <ol class="breadcrumb ms-auto">
+                                <li><a href="#" class="fw-normal">{{ user.username }}</a></li>
+                            </ol>
+                            <a href="{% url 'logout' %}" target="_blank"
+                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Log Out</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            
+                <div class="row">
+                    <div class="col-lg-2 col-lg-offset-9">
+                        <a href="{% url 'ea/create' %}">
+                            <button type="button" class="btn btn-success">
+                                <span class="fa fa-plus"></span> Add EA
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Tipe</th>
+                                    <th>Cluster</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ea in ea_list %}
+                                <tr>
+                                    <td>
+                                        {{ea.name}}
+                                    </td>
+                                    <td>
+                                        {{ea.EAType}}
+                                    </td>
+                                    <td>
+                                        {{ea.cluster}}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'ea/edit' ea.pk %}">
+                                            <button type="button" class="btn btn-info">
+                                                <span class="fa fa-edit"></span>
+                                            </button>
+                                        </a>
+                                        <a href="{% url 'ea/delete' ea.pk %}">
+                                            <button type="button" class="btn btn-danger">
+                                                <span class="fa fa-trash"></span>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+</div>
+</div>
+</div>
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+{% endblock %}
